@@ -42,7 +42,8 @@ export default {
 				},
 				accent: {
 					DEFAULT: 'hsl(var(--accent))',
-					foreground: 'hsl(var(--accent-foreground))'
+					foreground: 'hsl(var(--accent-foreground))',
+					yellow: 'hsl(var(--accent-yellow))'
 				},
 				popover: {
 					DEFAULT: 'hsl(var(--popover))',
@@ -67,6 +68,9 @@ export default {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
+			},
+			fontFamily: {
+				sans: ['var(--font-sans)'],
 			},
 			keyframes: {
 				'accordion-down': {
