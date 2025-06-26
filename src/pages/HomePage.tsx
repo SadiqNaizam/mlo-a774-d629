@@ -1,15 +1,9 @@
 import React from 'react';
 
-// Custom Layout Components
-import Header from '@/components/layout/Header';
-import LeftSidebar from '@/components/layout/LeftSidebar';
-import FooterPlayer from '@/components/layout/FooterPlayer';
-
 // Custom UI Components
 import ContentCard from '@/components/ContentCard';
 
 // shadcn/ui Components
-import { ScrollArea } from '@/components/ui/scroll-area';
 import {
   Carousel,
   CarouselContent,
@@ -22,7 +16,7 @@ import {
 const featuredPlaylists = [
   {
     imageUrl: 'https://picsum.photos/seed/playlist1/300/300',
-    title: 'Doraemon\'s Pocket Hits',
+    title: 'Doraemon\\'s Pocket Hits',
     subtitle: 'A collection of futuristic tunes.',
     href: '/playlist',
     type: 'playlist' as const,
@@ -137,66 +131,54 @@ const HomePage: React.FC = () => {
   console.log('HomePage loaded');
 
   return (
-    <div className="grid md:grid-cols-[280px_1fr] h-screen bg-neutral-900 text-white font-sans">
-      <LeftSidebar className="hidden md:block fixed top-0 left-0 h-full w-[280px]" />
-      
-      <main className="md:pl-[280px] flex flex-col h-screen">
-        <div className="relative flex-1 flex flex-col overflow-hidden">
-            <Header />
-            <ScrollArea className="flex-1 px-6 pb-24">
-              <div className="space-y-8 py-6">
-                {/* Featured Playlists Section */}
-                <section>
-                  <h2 className="text-2xl font-bold mb-4">Featured Playlists</h2>
-                  <Carousel opts={{ align: 'start' }} className="w-full">
-                    <CarouselContent>
-                      {featuredPlaylists.map((item, index) => (
-                        <CarouselItem key={index} className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5">
-                          <ContentCard {...item} />
-                        </CarouselItem>
-                      ))}
-                    </CarouselContent>
-                    <CarouselPrevious className="left-[-10px]"/>
-                    <CarouselNext className="right-[-10px]"/>
-                  </Carousel>
-                </section>
+    <div className="px-6 space-y-8 py-6">
+      {/* Featured Playlists Section */}
+      <section>
+        <h2 className="text-2xl font-bold mb-4">Featured Playlists</h2>
+        <Carousel opts={{ align: 'start' }} className="w-full">
+          <CarouselContent>
+            {featuredPlaylists.map((item, index) => (
+              <CarouselItem key={index} className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5">
+                <ContentCard {...item} />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="left-[-10px]"/>
+          <CarouselNext className="right-[-10px]"/>
+        </Carousel>
+      </section>
 
-                {/* New Releases Section */}
-                <section>
-                  <h2 className="text-2xl font-bold mb-4">New Releases</h2>
-                   <Carousel opts={{ align: 'start' }} className="w-full">
-                    <CarouselContent>
-                      {newReleases.map((item, index) => (
-                        <CarouselItem key={index} className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5">
-                          <ContentCard {...item} />
-                        </CarouselItem>
-                      ))}
-                    </CarouselContent>
-                    <CarouselPrevious className="left-[-10px]"/>
-                    <CarouselNext className="right-[-10px]"/>
-                  </Carousel>
-                </section>
+      {/* New Releases Section */}
+      <section>
+        <h2 className="text-2xl font-bold mb-4">New Releases</h2>
+          <Carousel opts={{ align: 'start' }} className="w-full">
+          <CarouselContent>
+            {newReleases.map((item, index) => (
+              <CarouselItem key={index} className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5">
+                <ContentCard {...item} />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="left-[-10px]"/>
+          <CarouselNext className="right-[-10px]"/>
+        </Carousel>
+      </section>
 
-                 {/* Top Artists Section */}
-                 <section>
-                  <h2 className="text-2xl font-bold mb-4">Top Artists</h2>
-                   <Carousel opts={{ align: 'start' }} className="w-full">
-                    <CarouselContent>
-                      {topArtists.map((item, index) => (
-                        <CarouselItem key={index} className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5">
-                          <ContentCard {...item} />
-                        </CarouselItem>
-                      ))}
-                    </CarouselContent>
-                    <CarouselPrevious className="left-[-10px]"/>
-                    <CarouselNext className="right-[-10px]"/>
-                  </Carousel>
-                </section>
-              </div>
-            </ScrollArea>
-        </div>
-        <FooterPlayer />
-      </main>
+        {/* Top Artists Section */}
+        <section>
+        <h2 className="text-2xl font-bold mb-4">Top Artists</h2>
+          <Carousel opts={{ align: 'start' }} className="w-full">
+          <CarouselContent>
+            {topArtists.map((item, index) => (
+              <CarouselItem key={index} className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5">
+                <ContentCard {...item} />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="left-[-10px]"/>
+          <CarouselNext className="right-[-10px]"/>
+        </Carousel>
+      </section>
     </div>
   );
 };
