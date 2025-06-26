@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 
+// Layout Components
+import Header from '@/components/layout/Header';
+import LeftSidebar from '@/components/layout/LeftSidebar';
+import FooterPlayer from '@/components/layout/FooterPlayer';
+
 // Custom Components
 import ContentCard from '@/components/ContentCard';
 import SongListItem from '@/components/SongListItem';
 
 // shadcn/ui Components
+import { ScrollArea } from '@/components/ui/scroll-area';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 // Placeholder Data
@@ -42,55 +48,64 @@ const LibraryPage = () => {
   };
 
   return (
-    <main className="p-6">
-      <h1 className="text-3xl font-bold mb-6">Your Library</h1>
-      <Tabs defaultValue="playlists" className="w-full">
-        <TabsList className="mb-4">
-          <TabsTrigger value="playlists">Playlists</TabsTrigger>
-          <TabsTrigger value="songs">Liked Songs</TabsTrigger>
-          <TabsTrigger value="albums">Albums</TabsTrigger>
-          <TabsTrigger value="artists">Artists</TabsTrigger>
-        </TabsList>
-        
-        <TabsContent value="playlists">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-            {placeholderPlaylists.map(playlist => (
-              <ContentCard key={playlist.id} {...playlist} type="playlist" />
-            ))}
-          </div>
-        </TabsContent>
-        
-        <TabsContent value="songs">
-          <div className="flex flex-col gap-1">
-            {placeholderLikedSongs.map((song, index) => (
-              <SongListItem 
-                key={song.id}
-                song={song}
-                trackNumber={index + 1}
-                isPlaying={playingSongId === song.id}
-                onPlay={handlePlay}
-              />
-            ))}
-          </div>
-        </TabsContent>
-        
-        <TabsContent value="albums">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-            {placeholderAlbums.map(album => (
-              <ContentCard key={album.id} {...album} type="album" />
-            ))}
-          </div>
-        </TabsContent>
+    <div className="flex h-screen bg-background text-foreground">
+      <LeftSidebar className="w-64" />
+      <div className="flex flex-1 flex-col">
+        <Header />
+        <ScrollArea className="flex-1">
+          <main className="p-6">
+            <h1 className="text-3xl font-bold mb-6">Your Library</h1>
+            <Tabs defaultValue="playlists" className="w-full">
+              <TabsList className="mb-4">
+                <TabsTrigger value="playlists">Playlists</TabsTrigger>
+                <TabsTrigger value="songs">Liked Songs</TabsTrigger>
+                <TabsTrigger value="albums">Albums</TabsTrigger>
+                <TabsTrigger value="artists">Artists</TabsTrigger>
+              </TabsList>
+              
+              <TabsContent value="playlists">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                  {placeholderPlaylists.map(playlist => (
+                    <ContentCard key={playlist.id} {...playlist} type="playlist" />
+                  ))}
+                </div>
+              </TabsContent>
+              
+              <TabsContent value="songs">
+                <div className="flex flex-col gap-1">
+                  {placeholderLikedSongs.map((song, index) => (
+                    <SongListItem 
+                      key={song.id}
+                      song={song}
+                      trackNumber={index + 1}
+                      isPlaying={playingSongId === song.id}
+                      onPlay={handlePlay}
+                    />
+                  ))}
+                </div>
+              </TabsContent>
+              
+              <TabsContent value="albums">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                  {placeholderAlbums.map(album => (
+                    <ContentCard key={album.id} {...album} type="album" />
+                  ))}
+                </div>
+              </TabsContent>
 
-        <TabsContent value="artists">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-            {placeholderArtists.map(artist => (
-              <ContentCard key={artist.id} {...artist} />
-            ))}
-          </div>
-        </TabsContent>
-      </Tabs>
-    </main>
+              <TabsContent value="artists">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                  {placeholderArtists.map(artist => (
+                    <ContentCard key={artist.id} {...artist} />
+                  ))}
+                </div>
+              </TabsContent>
+            </Tabs>
+          </main>
+        </ScrollArea>
+      </div>
+      <FooterPlayer />
+    </div>
   );
 };
 
